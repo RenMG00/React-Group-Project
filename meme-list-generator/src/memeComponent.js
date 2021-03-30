@@ -77,7 +77,7 @@ class MemeComponent extends Component {
                         <h2 className="bottom">{this.state.bottomText}</h2>
                     </div>
                     <div>
-                        {memeList}
+                        <MemeList/>
                     </div>
                 </div>
             </div>
