@@ -2,7 +2,7 @@ import React from "react";
 
 const Form = props => {
 
-    const { topText, bottomText, handleChange, createMeme, refresh } = props
+    const { topText, bottomText, handleChange, submitHandler, refresh } = props
     return (
         <div>
             <form className="meme-form">
@@ -20,7 +20,7 @@ const Form = props => {
                     value={bottomText}
                     onChange={handleChange}
                 />
-                <button onClick={createMeme}>Create Meme</button>
+                <button onClick={submitHandler}>Create Meme</button>
                 <button onClick={refresh}>Refresh Meme</button>
             </form>
         </div>

@@ -20,17 +20,17 @@ class MemeComp extends Component {
             .then(response => response.json())
             .then(response => {
                 console.log(response.data);
-                let   { memes }  = response.data;
-                console.log(memes[Math.floor(Math.random()* memes.length)])
+                let { memes } = response.data;
+                console.log(memes[Math.floor(Math.random() * memes.length)])
                 this.setState({
                     randomMemes: memes,
-                    currentMeme: memes[Math.floor(Math.random()* memes.length)]
+                    currentMeme: memes[Math.floor(Math.random() * memes.length)]
                 })
                 console.log(this.state.currentMeme, 111);
             })
     }
 
-   
+
     createMeme = e => {
         e.preventDefault()
 
@@ -48,10 +48,9 @@ class MemeComp extends Component {
         }))
     }
     handleChange = e => {
-        console.log(e.target)
-        this.setState(prevState => ({
-            ...prevState,
-            [e.target.name]: e.target.value
+        const { name, value } = e.target
+        this.setState(({
+            [name]: value
         }))
     }
 
@@ -60,19 +59,16 @@ class MemeComp extends Component {
         this.setState({
             topText: "",
             bottomText: "",
-            currentMeme: this.state.randomMemes[Math.floor(Math.random()* this.state.randomMemes.length)]
+            currentMeme: this.state.randomMemes[Math.floor(Math.random() * this.state.randomMemes.length)]
         })
     }
 
-  
+
     render() {
         console.log(this.state)
         return (
-            <div>
-             
-                <div className="meme">
-                    <img src={this.state.currentMeme.url} alt="" />
-                </div>
+            <>
+                <img className="meme" src={this.state.currentMeme.url} alt="" />
                 <div className="form-container">
                     <Form
                         topText={this.state.topText}
@@ -84,7 +80,7 @@ class MemeComp extends Component {
                         <MemeList memeList={this.state.memeList} />
                     </div>
                 </div>
-            </div>
+            </>
         )
     }
 }

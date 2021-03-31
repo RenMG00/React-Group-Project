@@ -9,8 +9,8 @@ const Meme = props => {
                 <img src={url} alt="" />
                 <h2 className="bottom">{bottomText}</h2>
                 <div>
-                    <button onClick={handleEdit(props.meme)}>Edit</button>
-                    <button onClick={handleDelete(props.meme.id)}>Delete</button>
+                    {/* <button onClick={handleEdit}>Edit</button> */}
+                    {/* <button onClick={handleDelete}>Delete</button> */}
                 </div>
         </div>
     )
