@@ -21,9 +21,10 @@ class MemeComp extends Component {
             .then(response => {
                 console.log(response.data);
                 let   { memes }  = response.data;
+                console.log(memes[Math.floor(Math.random()* memes.length)])
                 this.setState({
                     randomMemes: memes,
-                    currentMeme: memes[Math.floor(Math.random()* this.state.randomMemes.length)]
+                    currentMeme: memes[Math.floor(Math.random()* memes.length)]
                 })
                 console.log(this.state.currentMeme, 111);
             })
@@ -65,7 +66,7 @@ class MemeComp extends Component {
 
   
     render() {
-        
+        console.log(this.state)
         return (
             <div>
              
@@ -80,7 +81,7 @@ class MemeComp extends Component {
                         createMeme={this.createMeme}
                     />
                     <div>
-                        <MemeList props={this.state} />
+                        <MemeList memeList={this.state.memeList} />
                     </div>
                 </div>
             </div>

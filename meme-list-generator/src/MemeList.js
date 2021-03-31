@@ -2,13 +2,19 @@ import React from "react";
 import Meme from "./Meme";
 
 const MemeList = props => {
-
-   const memesList = props.memeList.map((meme, i) => <Meme key = {i} {...meme} />);
-    return (
-        <div>
-            {memesList}
-        </div>
-    )
+    console.log(props)
+    if (props.memeList != null) {
+        const memesList = props.memeList.map((meme, i) => <Meme key={i} {...meme} />);
+        return (
+            <div>
+                {memesList}
+            </div>
+        )
+    } else {
+        return (
+            <div></div>
+        )
+    }
 }
 
 export default MemeList;
