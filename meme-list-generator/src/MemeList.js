@@ -24,7 +24,6 @@ class MemeList extends React.Component {
                     <img src={this.props.url} alt="" />
                     <h2 className="bottom">{this.props.bottomText}</h2>
                     <div>
-                        {/* <button onClick={() => this.props.handleEdit(this.props.meme)}>Edit</button> */}
                         <button onClick={() => this.props.handleDelete(this.props.meme.id)}>Delete</button>
                     </div>
                     <form className="editForm">
@@ -40,7 +39,7 @@ class MemeList extends React.Component {
                             value={this.state.name}
                             onChange={this.handleChange}
                         />
-                        <button>Submit Edit</button>
+                        <button onClick={() => this.props.handleEdit(this.props.meme)}>Submit Edit</button>
                     </form>
                 </div>
             </div>
