@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import MemeList from "./MemeList";
 import Form from "./Form";
-import Meme from "./Meme";
 
 class MemeComp extends Component {
     constructor() {
@@ -35,14 +34,13 @@ class MemeComp extends Component {
             id: this.state.currentMeme.id,
             topText: this.state.topText,
             bottomText: this.state.bottomText,
-            url: this.state.currentMeme.url,
-            edited: false
+            url: this.state.currentMeme.url
         }
-
         this.setState(prevState => ({
             ...prevState,
             memeList: [...prevState.memeList, newMeme]
         }))
+        this.refresh(e)
     }
     handleChange = e => {
         const { name, value } = e.target
@@ -60,27 +58,33 @@ class MemeComp extends Component {
         })
     }
 
-    handleDelete = (e, id) => {
-        e.preventDefault();
-        console.log(e)
-        this.setState(prevState => ({
-            memeList: prevState.memeList.filter(meme => meme.id !== id)
-        }))
-    }
-
     handleEdit(meme) {
         this.setState({
             topText: meme.topText,
             currentMeme: {
                 url: meme.url
             },
-            memeList: this.state.memeList.filter(m => {
-                return m.id !== meme.id
-            })
+            memeList: this.state.memeList.filter(id => id.id !== meme)
         })
     }
-    render() {
+    
+    handleDelete = (id) => {
+        this.setState(prevState => ({
+            memeList: prevState.memeList.filter(meme => meme.id !== id)
+        }))
+    }
 
+    
+    render() {
+        let memesList = this.state.memeList.map(meme => {
+            return <MemeList
+                topText={meme.topText}
+                url={meme.url}
+                bottomText={meme.bottomText}
+                handleDelete={this.handleDelete}
+                meme={meme}
+                handleEdit={this.handleEdit} />
+        })
         return (
             <>
                 <div className="form-container">
@@ -90,16 +94,13 @@ class MemeComp extends Component {
                         handleChange={this.handleChange}
                         createMeme={this.createMeme}
                     />
-                    <img className="meme" src={this.state.currentMeme.url} alt="" />
+                    <div className="meme">
+                        <h2 className="top">{this.state.topText}</h2>
+                        <img src={this.state.currentMeme.url} alt="" />
+                        <h2 className="bottom">{this.state.bottomText}</h2>
+                    </div>
                     <div>
-                        <MemeList
-                            memeList={this.state.memeList}
-                            topText={this.state.topText}
-                            url={this.state.url}
-                            bottomText={this.state.bottomText}
-                            handleDelete={this.handleDelete}
-                            handleEdit={this.handleEdit}
-                        />
+                        {memesList}
                     </div>
                 </div>
             </>
