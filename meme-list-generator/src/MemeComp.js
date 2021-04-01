@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import MemeList from "./MemeList";
 import Form from "./Form";
+import Meme from "./Meme";
 
 class MemeComp extends Component {
     constructor() {
@@ -14,19 +15,15 @@ class MemeComp extends Component {
         }
     }
 
-
     componentDidMount() {
         fetch("https://api.imgflip.com/get_memes")
             .then(response => response.json())
             .then(response => {
-                console.log(response.data);
                 let { memes } = response.data;
-                console.log(memes[Math.floor(Math.random() * memes.length)])
                 this.setState({
                     randomMemes: memes,
                     currentMeme: memes[Math.floor(Math.random() * memes.length)]
                 })
-                console.log(this.state.currentMeme, 111);
             })
     }
 
@@ -63,12 +60,29 @@ class MemeComp extends Component {
         })
     }
 
+    handleDelete = (e, id) => {
+        e.preventDefault();
+        console.log(e)
+        this.setState(prevState => ({
+            memeList: prevState.memeList.filter(meme => meme.id !== id)
+        }))
+    }
 
+    handleEdit(meme) {
+        this.setState({
+            topText: meme.topText,
+            currentMeme: {
+                url: meme.url
+            },
+            memeList: this.state.memeList.filter(m => {
+                return m.id !== meme.id
+            })
+        })
+    }
     render() {
-        console.log(this.state)
+
         return (
             <>
-                <img className="meme" src={this.state.currentMeme.url} alt="" />
                 <div className="form-container">
                     <Form
                         topText={this.state.topText}
@@ -76,8 +90,16 @@ class MemeComp extends Component {
                         handleChange={this.handleChange}
                         createMeme={this.createMeme}
                     />
+                    <img className="meme" src={this.state.currentMeme.url} alt="" />
                     <div>
-                        <MemeList memeList={this.state.memeList} />
+                        <MemeList
+                            memeList={this.state.memeList}
+                            topText={this.state.topText}
+                            url={this.state.url}
+                            bottomText={this.state.bottomText}
+                            handleDelete={this.handleDelete}
+                            handleEdit={this.handleEdit}
+                        />
                     </div>
                 </div>
             </>

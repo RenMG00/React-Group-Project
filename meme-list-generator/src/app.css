@@ -1,0 +1,12 @@
+.meme{
+    height: 500px;
+    width: 500px;
+    border: 2pt solid black;
+}
+
+
+.memeContainer > img{
+    height: 200px;
+    width: 200px;
+    border: 2px solid black;
+}
