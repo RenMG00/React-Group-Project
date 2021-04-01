@@ -2,7 +2,7 @@ import React from "react";
 
 const Meme = props => {
 
-    const {topText, url, bottomText, handleEdit, handleDelete} = props
+    const {topText, url, bottomText} = props
     return (
         <div className="memeContainer">
                 <h2 className="top">{topText}</h2>
