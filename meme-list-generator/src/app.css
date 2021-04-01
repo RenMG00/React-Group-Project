@@ -1,15 +1,18 @@
-.meme{
+.meme {
     height: 500px;
     width: 500px;
     border: 2pt solid black;
 }
 
 .memeContainer {
+    margin-top: 10px;
+    height: 500px;
+    width: 500px;
     border: 1px solid black;
 }
 
 
 img {
-    height: 500px;
-    width: 500px;
+    height: 300px;
+    width: 300px;
 }

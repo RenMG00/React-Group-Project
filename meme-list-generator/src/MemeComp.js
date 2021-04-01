@@ -59,6 +59,7 @@ class MemeComp extends Component {
     }
 
     handleEdit(meme) {
+        console.log(this.state)
         this.setState({
             topText: meme.topText,
             currentMeme: {
