@@ -73,7 +73,7 @@ class MemeComp extends Component {
             ...prevState,
             memeList: [...prevState.memeList, editedMeme]
         }))
-        console.log(newMeme)
+        console.log(editedMeme)
     }
 
     handleDelete = (id) => {

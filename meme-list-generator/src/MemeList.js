@@ -36,13 +36,13 @@ class MemeList extends React.Component {
                                 name='topText'
                                 type='text'
                                 value={this.state.name}
-                                onChange={this.props.handleChange}
+                                onChange={this.handleChange}
                             />
                             <input
                                 name='bottomText'
                                 type='text'
                                 value={this.state.name}
-                                onChange={this.props.handleChange}
+                                onChange={this.handleChange}
                             />
                             <button onClick={(e) => {
                                 e.preventDefault()
