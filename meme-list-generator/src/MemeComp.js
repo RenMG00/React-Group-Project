@@ -2,20 +2,18 @@ import React, { Component } from "react";
 import MemeList from "./MemeList";
 import Form from "./Form";
 
+
 class MemeComp extends Component {
-    constructor() {
-        super()
-        this.state = {
-            topText: "",
-            bottomText: "",
-            currentMeme: [],
-            randomMemes: [],
-            memeList: []
-        }
+    state = {
+        topText: "",
+        bottomText: "",
+        currentMeme: [],
+        randomMemes: [],
+        memeList: []
     }
 
-
-    componentDidMount() {
+// Mounts random meme image to page
+    componentDidMount = () => {
         fetch("https://api.imgflip.com/get_memes")
             .then(response => response.json())
             .then(response => {
@@ -30,10 +28,10 @@ class MemeComp extends Component {
             })
     }
 
-
+// This function should allow the user to enter their data and submit as a caption for the meme
     createMeme = e => {
         e.preventDefault()
-
+        // New meme variable
         const newMeme = {
             id: this.state.currentMeme.id,
             topText: this.state.topText,
@@ -41,19 +39,20 @@ class MemeComp extends Component {
             url: this.state.currentMeme.url,
             edited: false
         }
-
+        // State change upon meme submission
         this.setState(prevState => ({
             ...prevState,
             memeList: [...prevState.memeList, newMeme]
         }))
     }
+    // Handle Change function used to display preview
     handleChange = e => {
         const { name, value } = e.target
-        this.setState(({
+        this.setState({
             [name]: value
-        }))
+        })
     }
-
+    // refreshes meme image
     refresh = e => {
         e.preventDefault();
         this.setState({
@@ -66,10 +65,11 @@ class MemeComp extends Component {
 
     render() {
         console.log(this.state)
+        const memeList = this.state.memeList.map((meme) => { return <MemeList meme = {meme.id} img={meme.url}/>})
         return (
             <>
-                <img className="meme" src={this.state.currentMeme.url} alt="" />
-                <div className="form-container">
+                <img className="meme" src={this.state.currentMeme.url} alt="" value={this.state.name} onChange={this.handleChange}/>
+                <div className="form-container" >
                     <Form
                         topText={this.state.topText}
                         bottomText={this.state.bottomText}
@@ -77,7 +77,7 @@ class MemeComp extends Component {
                         createMeme={this.createMeme}
                     />
                     <div>
-                        <MemeList memeList={this.state.memeList} />
+                        {memeList}
                     </div>
                 </div>
             </>
