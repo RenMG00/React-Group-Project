@@ -63,7 +63,7 @@ class MemeComp extends Component {
             memeList: prevState.memeList.filter(oldMeme => oldMeme.id !== meme.id)
         }))
 
-        const newMeme = {
+        const editedMeme = {
             id: meme.id,
             topText: topText,
             bottomText: bottomText,
@@ -71,7 +71,7 @@ class MemeComp extends Component {
         }
         this.setState(prevState => ({
             ...prevState,
-            memeList: [...prevState.memeList, newMeme]
+            memeList: [...prevState.memeList, editedMeme]
         }))
         console.log(newMeme)
     }
