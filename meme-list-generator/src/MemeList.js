@@ -10,6 +10,13 @@ class MemeList extends React.Component {
         }
     }
 
+    handleChange = e => {
+        const { name, value } = e.target
+        this.setState(({
+            [name]: value
+        }))
+    }
+
     switchEditMode = () => {
         console.log(this.state.editMode)
         this.setState(({
@@ -24,9 +31,9 @@ class MemeList extends React.Component {
             return (
                 <div>
                     <div className='memeContainer'>
-                        <h2 className="top">{this.props.topText}</h2>
+                        <h2 className="topText">{this.props.topText}</h2>
                         <img src={this.props.url} alt="" />
-                        <h2 className="bottom">{this.props.bottomText}</h2>
+                        <h2 className="bottomText">{this.props.bottomText}</h2>
                         <div>
                             <button>Edit</button>
                             <button onClick={() => this.props.handleDelete(this.props.meme.id)}>Delete</button>
@@ -47,7 +54,7 @@ class MemeList extends React.Component {
                             <button onClick={(e) => {
                                 e.preventDefault()
                                 console.log(this.state)
-                                this.props.handleEdit(this.props.meme)
+                                this.props.handleEdit(this.props.meme, this.state.topText, this.state.bottomText)
                             }}>Submit Edit</button>
                         </form>
                     </div>
@@ -58,9 +65,9 @@ class MemeList extends React.Component {
             return (
                 <div>
                     <div className='memeContainer'>
-                        <h2 className="top">{this.props.topText}</h2>
+                        <h2 className="topText">{this.props.topText}</h2>
                         <img src={this.props.url} alt="" />
-                        <h2 className="bottom">{this.props.bottomText}</h2>
+                        <h2 className="bottomText">{this.props.bottomText}</h2>
                         <div>
                             <button onClick={() => this.switchEditMode()}>Edit</button>
                             <button onClick={() => this.props.handleDelete(this.props.meme.id)}>Delete</button>

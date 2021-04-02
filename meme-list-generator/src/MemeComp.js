@@ -58,22 +58,27 @@ class MemeComp extends Component {
     }
 
     handleEdit = (meme, topText, bottomText) => {
-        console.log(topText)
-        this.setState(prevState => ({
-            memeList: prevState.memeList.filter(oldMeme => oldMeme.id !== meme.id)
-        }))
+        // console.log(topText)
+        // this.setState(prevState => ({
+        //     memeList: prevState.memeList.filter(oldMeme => oldMeme.id !== meme.id)
+        // }))
 
-        const editedMeme = {
-            id: meme.id,
-            topText: topText,
-            bottomText: bottomText,
-            url: meme.url
-        }
-        this.setState(prevState => ({
-            ...prevState,
-            memeList: [...prevState.memeList, editedMeme]
-        }))
-        console.log(editedMeme)
+        // const editedMeme = {
+        //     id: meme.id,
+        //     topText: topText,
+        //     bottomText: bottomText,
+        //     url: meme.url
+        // }
+        this.setState(prevState => {
+            let editList = [...prevState.memeList]
+            let index = prevState.memeList.findIndex(oldMeme => oldMeme.id === meme.id)
+            editList[index] = { ...editList[index], topText: topText, bottomText: bottomText }
+            return {
+                ...prevState,
+                memeList: editList
+            }
+        })
+        // console.log(editedMeme)
     }
 
     handleDelete = (id) => {
