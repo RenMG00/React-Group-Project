@@ -12,12 +12,7 @@ class MemeComp extends Component {
         memeList: []
     }
 
-<<<<<<< HEAD
     componentDidMount() {
-=======
-// Mounts random meme image to page
-    componentDidMount = () => {
->>>>>>> 9b2a30295f18efbe1e8057793719c820b6252edd
         fetch("https://api.imgflip.com/get_memes")
             .then(response => response.json())
             .then(response => {
@@ -29,10 +24,6 @@ class MemeComp extends Component {
             })
     }
 
-<<<<<<< HEAD
-=======
-// This function should allow the user to enter their data and submit as a caption for the meme
->>>>>>> 9b2a30295f18efbe1e8057793719c820b6252edd
     createMeme = e => {
         e.preventDefault()
         // New meme variable
@@ -42,10 +33,7 @@ class MemeComp extends Component {
             bottomText: this.state.bottomText,
             url: this.state.currentMeme.url
         }
-<<<<<<< HEAD
-=======
         // State change upon meme submission
->>>>>>> 9b2a30295f18efbe1e8057793719c820b6252edd
         this.setState(prevState => ({
             ...prevState,
             memeList: [...prevState.memeList, newMeme]
@@ -92,7 +80,6 @@ class MemeComp extends Component {
 
 
     render() {
-<<<<<<< HEAD
         let memesList = this.state.memeList.map(meme => {
             return <MemeList
                 topText={meme.topText}
@@ -106,14 +93,6 @@ class MemeComp extends Component {
         return (
             <>
                 <div className="form-container">
-=======
-        console.log(this.state)
-        const memeList = this.state.memeList.map((meme) => { return <MemeList meme = {meme.id} img={meme.url}/>})
-        return (
-            <>
-                <img className="meme" src={this.state.currentMeme.url} alt="" value={this.state.name} onChange={this.handleChange}/>
-                <div className="form-container" >
->>>>>>> 9b2a30295f18efbe1e8057793719c820b6252edd
                     <Form
                         topText={this.state.topText}
                         bottomText={this.state.bottomText}
@@ -126,11 +105,7 @@ class MemeComp extends Component {
                         <h2 className="bottom">{this.state.bottomText}</h2>
                     </div>
                     <div>
-<<<<<<< HEAD
                         {memesList}
-=======
-                        {memeList}
->>>>>>> 9b2a30295f18efbe1e8057793719c820b6252edd
                     </div>
                 </div>
             </>
