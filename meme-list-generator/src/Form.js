@@ -2,7 +2,7 @@ import React from "react";
 
 const Form = props => {
 
-    const { topText, bottomText, handleChange, createMeme, refresh } = props
+    const { topText, bottomText, handleChange, url, currentMeme ,createMeme, refresh } = props
     return (
         <div>
             <form className="meme-form">
