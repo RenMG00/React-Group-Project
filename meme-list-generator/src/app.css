@@ -1,0 +1,30 @@
+.meme {
+    padding-left: 15px;
+    height: 425px;
+    width: 400px;
+    text-align: center;
+    border: 2pt solid black;
+}
+
+.memeContainer {
+    text-align: center;
+    padding-left: 15px;
+    margin-top: 10px;
+    height: 525px;
+    width: 400px;
+    border: 2pt solid black;
+    background-color: whitesmoke;
+}
+img {
+    height: 300px;
+    width:300px;
+    padding-left: 0px;
+}
+
+button {
+    margin: 5px;
+}
+
+input {
+    margin-right: 5px;
+}

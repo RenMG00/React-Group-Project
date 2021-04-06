@@ -1,7 +1,6 @@
 
 import React from "react";
 import MemeComp from "./MemeComp";
-import MemeList from "./MemeList";
 
 
 const App = () => {
@@ -10,7 +9,6 @@ const App = () => {
       <div>
         <h1>Meme Generator</h1>
         <MemeComp />
-        <MemeList />
       </div>
     )
   

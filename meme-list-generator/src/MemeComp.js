@@ -14,22 +14,17 @@ class MemeComp extends Component {
         }
     }
 
-
     componentDidMount() {
         fetch("https://api.imgflip.com/get_memes")
             .then(response => response.json())
             .then(response => {
-                console.log(response.data);
                 let { memes } = response.data;
-                console.log(memes[Math.floor(Math.random() * memes.length)])
                 this.setState({
                     randomMemes: memes,
                     currentMeme: memes[Math.floor(Math.random() * memes.length)]
                 })
-                console.log(this.state.currentMeme, 111);
             })
     }
-
 
     createMeme = e => {
         e.preventDefault()
@@ -38,14 +33,13 @@ class MemeComp extends Component {
             id: this.state.currentMeme.id,
             topText: this.state.topText,
             bottomText: this.state.bottomText,
-            url: this.state.currentMeme.url,
-            edited: false
+            url: this.state.currentMeme.url
         }
-
         this.setState(prevState => ({
             ...prevState,
             memeList: [...prevState.memeList, newMeme]
         }))
+        this.refresh(e)
     }
     handleChange = e => {
         const { name, value } = e.target
@@ -63,12 +57,41 @@ class MemeComp extends Component {
         })
     }
 
+    handleEdit = (meme, topText, bottomText) => {
+       
+        this.setState(prevState => {
+            let editList = [...prevState.memeList]
+            let index = prevState.memeList.findIndex(oldMeme => oldMeme.id === meme.id)
+            editList[index] = { ...editList[index], topText: topText, bottomText: bottomText }
+            return {
+                ...prevState,
+                memeList: editList
+            }
+        })
+        
+    }
+
+    handleDelete = (id) => {
+        console.log(id)
+        this.setState(prevState => ({
+            memeList: prevState.memeList.filter(meme => meme.id !== id)
+        }))
+    }
+
 
     render() {
-        console.log(this.state)
+        let memesList = this.state.memeList.map(meme => {
+            return <MemeList
+                topText={meme.topText}
+                url={meme.url}
+                bottomText={meme.bottomText}
+                meme={meme}
+                handleDelete={this.handleDelete}
+                handleEdit={this.handleEdit}
+            />
+        })
         return (
             <>
-                <img className="meme" src={this.state.currentMeme.url} alt="" />
                 <div className="form-container">
                     <Form
                         topText={this.state.topText}
@@ -76,8 +99,13 @@ class MemeComp extends Component {
                         handleChange={this.handleChange}
                         createMeme={this.createMeme}
                     />
+                    <div className="meme">
+                        <h2 className="top">{this.state.topText}</h2>
+                        <img src={this.state.currentMeme.url} alt="" />
+                        <h2 className="bottom">{this.state.bottomText}</h2>
+                    </div>
                     <div>
-                        <MemeList memeList={this.state.memeList} />
+                        {memesList}
                     </div>
                 </div>
             </>
